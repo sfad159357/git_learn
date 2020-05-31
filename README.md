@@ -4,8 +4,11 @@ Git and GitHub for Beginners - Crash Course from freecodecamp
 
 # github字元符號
 '#'，代表標題
+
 '>'，代表code
+
 '~'，代表刪除號
+
 '\\'，代表取消符號功能
 
 
@@ -48,6 +51,7 @@ git add.之後，這指令一次包括git add .和git commit，每次commit都�
 >git push origin master 
 
 orgin，代表git repository的位置
+
 master，代表這個主幹我們要去push上傳的
 ## 回到家目錄~
 在上傳之前要打造ssh-key，才能夠push
@@ -55,6 +59,7 @@ master，代表這個主幹我們要去push上傳的
 
 跑出底下訊息=>
 Enter file in which to save the key (/Users/chieng-ming-yen/.ssh/id_rsa): testkey (如果沒有輸入，就會默認上面電腦給你的路徑~/.ssh/id_rsa)
+
 輸入完檔案名稱，後面相關的設定也要跟著改成testkey
 
 Enter passphrase (empty for no passphrase):
@@ -76,6 +81,7 @@ pbcopy:複製上一段終端機訊息， < 後面是你要放的目錄
 
 # ssh檔案
 testkey.pub : 用來上傳github的介面
+
 pub，代表public，用來讓公開其他人可以看到你上傳的檔案
 
 相對的，testkey後面沒有pub，則是private key，上傳自己才看得到東西
@@ -102,7 +108,9 @@ AddKeysToAgent yes
 
 UseKeychain yes
 
-IdentityFile testkey #(官方：\~/.ssh/id_rsa)
+IdentityFile testkey 
+
+#(官方：\~/.ssh/id_rsa)
 
 然後按ESC離開模式，輸入:wq
 
@@ -147,12 +155,12 @@ w，儲存。q:離開
 但這兩方法還是不行
 
 使用底下方法後就ok了，分支樹：
-
+"""
             tmp
              /--tmp('1')--tmp(' ')-- 
 master('2')--               [rebase]\
              \--master('2')--------master,tmp(2,' ') => push HEAD:master , delete tmp 
-
+"""
 從github取檔在master分枝tmp
 >git fetch origin master:tmp
 
