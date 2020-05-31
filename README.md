@@ -1,5 +1,6 @@
 # git_learn
 Git and GitHub for Beginners - Crash Course from freecodecamp
+
 開始日期：2020/05/29
 
 # github字元符號
@@ -16,11 +17,14 @@ Git and GitHub for Beginners - Crash Course from freecodecamp
 複製github專案到本機上：
 >git clone "github repo網址"
 
+
 起始化新的git repo：
 >git init 
 
+
 list所有檔案包含隱藏的檔案：
 >ls -la 
+
 
 查看狀態：
 >git staus 
@@ -31,10 +35,12 @@ list所有檔案包含隱藏的檔案：
 
 綠字，代表檔案被追蹤足跡
 
-讓git去追蹤更新後的檔案
+
+讓git去追蹤更新後的檔案:
 >git add “files" 
 
 . 代表所有檔案
+
 
 提交待上傳區：
 >git commit -m "更新主題" -m "詳細內容" 
@@ -47,12 +53,15 @@ list所有檔案包含隱藏的檔案：
 
 git add.之後，這指令一次包括git add .和git commit，每次commit都要附加訊息，不然無法commit
 
+
 上傳github：
 >git push origin master 
 
 orgin，代表git repository的位置
 
 master，代表這個主幹我們要去push上傳的
+
+
 ## 回到家目錄~
 在上傳之前要打造ssh-key，才能夠push
 >ssh-keygen -t rsa -b 4096 -C "sfad159357@gmail.com"
@@ -64,13 +73,16 @@ Enter file in which to save the key (/Users/chieng-ming-yen/.ssh/id_rsa): testke
 
 Enter passphrase (empty for no passphrase):
 
+
 可以查詢ssh key檔案:
 >ls | grep testkey  
+
 
 顯示SSH token:
 >cat testkey.pub  
 
 要做終端機訊息的copy，首先要把copy的訊息highlight，而不是用cmd+C，對終端機而言，那是不同的指令，匡起來後輸入指令：
+
 
 複製token到\~/.ssh目錄裡面：
 >pbcopy < ~/.ssh
@@ -78,6 +90,7 @@ Enter passphrase (empty for no passphrase):
 pbcopy:複製上一段終端機訊息， < 後面是你要放的目錄
 
 然後去到自己的github，點自己的頭像進去自己的主頁，在最右上角自己頭像的地方打開選單，底下有的settings，左側欄位有個SSH and GPG keys，點進去，右上方有個New SSK key，命名自己的ssh key，底下輸入key token，記住不能讓別人看到這個token
+
 
 # ssh檔案
 testkey.pub : 用來上傳github的介面
@@ -93,9 +106,11 @@ pub，代表public，用來讓公開其他人可以看到你上傳的檔案
 
 跳出訊息：Agent pid 15759
 
+
 如果自己使用macOS sirrea 10.12.12或以上，需要修改\~/.ssh/config檔
 
 我的筆電是macOS Mojave 10.14.6，所以要修改
+
 
 打開vim編輯器修改config:
 >vim ~/.ssh/config
@@ -116,6 +131,7 @@ IdentityFile testkey
 
 w，儲存。q:離開
 
+
 最後要把ssh key安裝到git上:
 >ssh-add -K \~/.ssh/testkey 
 
@@ -131,12 +147,15 @@ w，儲存。q:離開
 所以回到github創第二個repo:
 >$ git remote add origin https://github.com/sfad159357/git_learn2.git
 
+
 檢查看看是否有新增:
 >$ git remote -v
+
 
 # 默認設置
 如果不想每次push都要輸入後面的origin master，可以輸入:
 >$ git push -u origin master
+
 
 # 被拒絕push
 中間發生了小插曲，我在本地端先建立README.md的文件，後來在遠端的github創建新的repo，然後也順便創建了新的README.md。
@@ -147,6 +166,7 @@ w，儲存。q:離開
 1.先拉回來推上去
 >git pull
 
+
 把遠端repo拉回來直接進行一般合併:
 >git pull --rebase
 
@@ -154,24 +174,32 @@ w，儲存。q:離開
 
 但這兩方法還是不行
 
-使用底下方法後就ok了，分支樹：
+
+使用底下方法後就ok了，分支樹(VS code)：
+
 """
             tmp
              /--tmp('1')--tmp(' ')-- 
 master('2')--               [rebase]\
-             \--master('2')--------master,tmp(2,' ') => push HEAD:master , delete tmp 
+             \\--master('2')--------master,tmp(2,' ') => push HEAD:master , delete tmp 
+
 """
+
 從github取檔在master分枝tmp
 >git fetch origin master:tmp
+
 
 master本地內容合併分枝tmp遠端內容
 >git rebase tmp
 
+
 在master頂端進行push
 >git push origin HEAD:master
 
+
 刪掉分枝tmp
 >git branch -D tmp
+
 
 fetch，代表先拉回來但不要自動合併
 
