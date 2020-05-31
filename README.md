@@ -44,15 +44,13 @@ Enter file in which to save the key (/Users/chieng-ming-yen/.ssh/id_rsa): testke
 
 Enter passphrase (empty for no passphrase):
 
-ls | grep testkey : 可以查詢ssh key檔案
+>ls | grep testkey  #可以查詢ssh key檔案
 
-cat testkey.pub : 顯示SSH token
+>cat testkey.pub  #顯示SSH token
 
 要做終端機訊息的copy，首先要把copy的訊息highlight，而不是用cmd+C，對終端機而言，那是不同的指令，匡起來後輸入指令：
 
-pbcopy < ~/.ssh
-
-< 後面是你要放的目錄
+>pbcopy < ~/.ssh #pbcopy:複製上一段終端機訊息， < 後面是你要放的目錄
 
 然後去到自己的github，點自己的頭像進去自己的主頁，在最右上角自己頭像的地方打開選單，底下有的settings，左側欄位有個SSH and GPG keys，點進去，右上方有個New SSK key，命名自己的ssh key，底下輸入key token，記住不能讓別人看到這個token
 
@@ -115,9 +113,9 @@ $ git pull --rebase
 使用底下方法後就ok了，分支樹：
 
             tmp
-             /--tmp('1')--tmp(' ')--tmp(2,' ') => delete
-master('2')--             [rebase]
-             \--master('2')------master(2,' ') => push HEAD:master
+             /--tmp('1')--tmp(' ')-- 
+master('2')--               [rebase]\
+             \--master('2')--------master,tmp(2,' ') => push HEAD:master , delete tmp 
 >$ git fetch origin master:tmp
 >$ git rebase tmp
 >$ git push origin HEAD:master
