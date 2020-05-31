@@ -6,7 +6,7 @@ Git and GitHub for Beginners - Crash Course from freecodecamp
 '#'，代表標題
 '>'，代表code
 '~'，代表刪除號
-'\'，代表取消符號功能
+'\\'，代表取消符號功能
 
 
 # terminal指令$
@@ -21,25 +21,32 @@ list所有檔案包含隱藏的檔案：
 
 查看狀態：
 >git staus 
+
 可以查看現在落在哪個主幹或分枝，也可查看哪些檔案的狀態
+
 紅字，代表尚未被commit
+
 綠字，代表檔案被追蹤足跡
 
 讓git去追蹤更新後的檔案
 >git add “files" 
+
 . 代表所有檔案
 
 提交待上傳區：
 >git commit -m "更新主題" -m "詳細內容" 
- -m，message
+
+-m，message
 先會在本機上儲存更新後的內容，還有上傳到github，然後status內的檔案都清空
 
 追蹤並提交：
->git commit -a -m"更新主題" -m "詳細內容" 
+>git commit -a -m"更新主題" -m "詳細內容"
+
 git add.之後，這指令一次包括git add .和git commit，每次commit都要附加訊息，不然無法commit
 
 上傳github：
 >git push origin master 
+
 orgin，代表git repository的位置
 master，代表這個主幹我們要去push上傳的
 ## 回到家目錄~
@@ -61,7 +68,8 @@ Enter passphrase (empty for no passphrase):
 要做終端機訊息的copy，首先要把copy的訊息highlight，而不是用cmd+C，對終端機而言，那是不同的指令，匡起來後輸入指令：
 
 複製token到\~/.ssh目錄裡面：
->pbcopy < ~/.ssh 
+>pbcopy < ~/.ssh
+
 pbcopy:複製上一段終端機訊息， < 後面是你要放的目錄
 
 然後去到自己的github，點自己的頭像進去自己的主頁，在最右上角自己頭像的地方打開選單，底下有的settings，左側欄位有個SSH and GPG keys，點進去，右上方有個New SSK key，命名自己的ssh key，底下輸入key token，記住不能讓別人看到這個token
@@ -76,22 +84,35 @@ pub，代表public，用來讓公開其他人可以看到你上傳的檔案
 
 開啟ssh-agent:
 >eval "$(ssh-agent -s)"
+
 跳出訊息：Agent pid 15759
 
-如果自己使用macOS sirrea 10.12.12或以上，需要修改\~/.ssh/config檔 
+如果自己使用macOS sirrea 10.12.12或以上，需要修改\~/.ssh/config檔
+
 我的筆電是macOS Mojave 10.14.6，所以要修改
+
+打開vim編輯器修改config:
 >vim ~/.ssh/config
+
 按E，進入編輯，按I，進入INSERT模式，輸入：
+
 Host *
+
 AddKeysToAgent yes
+
 UseKeychain yes
+
 IdentityFile testkey #(官方：\~/.ssh/id_rsa)
+
 然後按ESC離開模式，輸入:wq
+
 w，儲存。q:離開
 
-最後要把ssh key安裝到git上
+最後要把ssh key安裝到git上:
 >ssh-add -K \~/.ssh/testkey 
+
  (官方：\~/.ssh/id_rsa)
+
 => Identity added: testkey (sfad159357@gmail.com)
 
 # 隱藏檔案.git：用來儲存所有commit後的檔案
@@ -99,11 +120,10 @@ w，儲存。q:離開
 # 其他dir進行git
 當創建其他的目錄後，首先$ git init，然後做完commit後，發現$ git push origin master出現fatal，因為要給github第二個repository給他 
 
-所以回到github創第二個repo
-
+所以回到github創第二個repo:
 >$ git remote add origin https://github.com/sfad159357/git_learn2.git
 
-檢查看看是否有新增
+檢查看看是否有新增:
 >$ git remote -v
 
 # 默認設置
@@ -118,9 +138,12 @@ w，儲存。q:離開
 解決方法：
 1.先拉回來推上去
 >git pull
-把遠端repo拉回來直接進行一般合併
+
+把遠端repo拉回來直接進行一般合併:
 >git pull --rebase
+
 --rebase代表用rebase方式合併
+
 但這兩方法還是不行
 
 使用底下方法後就ok了，分支樹：
@@ -129,17 +152,24 @@ w，儲存。q:離開
              /--tmp('1')--tmp(' ')-- 
 master('2')--               [rebase]\
              \--master('2')--------master,tmp(2,' ') => push HEAD:master , delete tmp 
+
+從github取檔在master分枝tmp
 >git fetch origin master:tmp
 
+master本地內容合併分枝tmp遠端內容
 >git rebase tmp
 
+在master頂端進行push
 >git push origin HEAD:master
 
+刪掉分枝tmp
 >git branch -D tmp
 
 fetch，代表先拉回來但不要自動合併
+
 master:tmp，代表master的分枝
+
 -D，代表刪除分枝
 
-2.強迫覆蓋，不在我本機上的文件通通不見
+2.強迫覆蓋，不在我本機上的文件通通不見:
 >git push -f
