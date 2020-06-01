@@ -17,14 +17,11 @@ Git and GitHub for Beginners - Crash Course from freecodecamp
 複製github專案到本機上：
 >git clone "github repo網址"
 
-
 起始化新的git repo：
 >git init 
 
-
 list所有檔案包含隱藏的檔案：
 >ls -la 
-
 
 查看狀態：
 >git staus 
@@ -35,12 +32,10 @@ list所有檔案包含隱藏的檔案：
 
 綠字，代表檔案被追蹤足跡
 
-
 讓git去追蹤更新後的檔案:
 >git add “files" 
 
 . 代表所有檔案
-
 
 提交待上傳區：
 >git commit -m "更新主題" -m "詳細內容" 
@@ -53,7 +48,6 @@ list所有檔案包含隱藏的檔案：
 
 git add.之後，這指令一次包括git add .和git commit，每次commit都要附加訊息，不然無法commit
 
-
 上傳github：
 >git push origin master 
 
@@ -61,6 +55,17 @@ orgin，代表git repository的位置
 
 master，代表這個主幹我們要去push上傳的
 
+查詢分枝狀態：
+>git branch
+
+master，主幹
+
+創建新分支並轉換：
+>git checkout -b "分枝名稱"
+
+-b，branch
+
+git checkout master，轉換回主幹 
 
 ## 回到家目錄~
 在上傳之前要打造ssh-key，才能夠push
@@ -73,16 +78,13 @@ Enter file in which to save the key (/Users/chieng-ming-yen/.ssh/id_rsa): testke
 
 Enter passphrase (empty for no passphrase):
 
-
 可以查詢ssh key檔案:
 >ls | grep testkey  
-
 
 顯示SSH token:
 >cat testkey.pub  
 
 要做終端機訊息的copy，首先要把copy的訊息highlight，而不是用cmd+C，對終端機而言，那是不同的指令，匡起來後輸入指令：
-
 
 複製token到\~/.ssh目錄裡面：
 >pbcopy < ~/.ssh
@@ -105,7 +107,6 @@ pub，代表public，用來讓公開其他人可以看到你上傳的檔案
 >eval "$(ssh-agent -s)"
 
 跳出訊息：Agent pid 15759
-
 
 如果自己使用macOS sirrea 10.12.12或以上，需要修改\~/.ssh/config檔
 
@@ -131,7 +132,6 @@ IdentityFile testkey
 
 w，儲存。q:離開
 
-
 最後要把ssh key安裝到git上:
 >ssh-add -K \~/.ssh/testkey 
 
@@ -147,15 +147,12 @@ w，儲存。q:離開
 所以回到github創第二個repo:
 >$ git remote add origin https://github.com/sfad159357/git_learn2.git
 
-
 檢查看看是否有新增:
 >$ git remote -v
-
 
 # 默認設置
 如果不想每次push都要輸入後面的origin master，可以輸入:
 >$ git push -u origin master
-
 
 # 被拒絕push
 中間發生了小插曲，我在本地端先建立README.md的文件，後來在遠端的github創建新的repo，然後也順便創建了新的README.md。
@@ -165,7 +162,6 @@ w，儲存。q:離開
 解決方法：
 1.先拉回來推上去
 >git pull
-
 
 把遠端repo拉回來直接進行一般合併:
 >git pull --rebase
@@ -185,21 +181,17 @@ master('2')--               [rebase]\
 
 """
 
-從github取檔在master分枝tmp
+從github取檔在master分枝tmp:
 >git fetch origin master:tmp
 
-
-master本地內容合併分枝tmp遠端內容
+master本地內容合併分枝tmp遠端內容:
 >git rebase tmp
 
-
-在master頂端進行push
+在master頂端進行push:
 >git push origin HEAD:master
 
-
-刪掉分枝tmp
+刪掉分枝tmp:
 >git branch -D tmp
-
 
 fetch，代表先拉回來但不要自動合併
 
