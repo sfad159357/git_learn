@@ -150,6 +150,10 @@ reset XXX，XXX可以是commit編號，可以是主幹/分枝，可以是HEAD
 
 將遠端合併完成的master拉到本地端的code，繼續進行coding。這樣做確保不會有錯誤的code混進master code裡面。
 
+4.通常不會在本地端直接進行merge，但是master會有其他人的分枝進行新增或刪減，你不會希望自己處理的分枝，離github裡的master專案內容越差越遠，這樣到時候很難合併。所以會將遠地端的master進行git pull到自己本地端的master，然後自己本地端的分枝去合併拉到本地端的master。如此一來， 才能夠讓你自己的分枝follow最新master開發進度。
+
+5.當master和分枝在同個行的code中發生兩個不一樣的code的時候，進行merge，git會丟出conflict出來，這時用VS code就很方便，看你要怎麼去合併他。選擇選項後的合併，需要再次進行一次commit -am，
+
 ## 回到家目錄~s
 在上傳之前要打造ssh-key，才能夠push
 >ssh-keygen -t rsa -b 4096 -C "sfad159357@gmail.com"
@@ -285,8 +289,4 @@ master:tmp，代表master的分枝
 2.強迫覆蓋，不在我本機上的文件通通不見:
 >git push -f
 
-<<<<<<< HEAD
-## 分枝測試1
-=======
 ## master測試1
->>>>>>> master
