@@ -70,6 +70,9 @@ master，主幹
 
 git master，直接轉換回主幹
 
+分枝改名：
+>git branch -m "舊分枝名" "新分枝名"
+
 *** 記得要按ctrl+S，儲存後電腦才知道那是已經修改過的內容
 在checkout之前，要先把任何修改後的內容做個commit
 
@@ -80,7 +83,7 @@ git master，直接轉換回主幹
 
 如果在master，就diff 分枝名。反之亦然。
 
-可以在終端機直接判讀差異，可以按Q返回。(但目前我的終端機diff出來對不起來...)
+可以在終端機直接判讀差異，可以按Q返回。(但目前我的終端機diff出來對不起來。ps:底下:往下拉會有訊息移上來)
 
 進行分枝push:
 >git push --set-upstream origin "分枝名"
@@ -113,6 +116,8 @@ reset XXX，XXX可以是commit編號，可以是主幹/分枝，可以是HEAD
 若要看到倒數n筆紀錄：
 >git log -"n"
 
+查看HEAD位置：
+>git show HEAD
 
 ## 回到家目錄~s
 在上傳之前要打造ssh-key，才能夠push
