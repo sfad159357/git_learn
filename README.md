@@ -60,12 +60,18 @@ master，代表這個主幹我們要去push上傳的
 
 master，主幹
 
+創建新分枝：
+>git branch "分枝名"
+
 創建新分支並轉換：
 >git checkout -b "分枝名稱"
 
 -b，branch
 
 git master，直接轉換回主幹
+
+*** 記得要按ctrl+S，儲存後電腦才知道那是已經修改過的內容
+在checkout之前，要先把任何修改後的內容做個commit
 
 *在分枝中add, commit後，這時被修改的資訊被儲存於分枝裡頭，這時再切回主幹，會回復原來上次commit後的內容。因為後面做的修改，已經被岔出分枝當中，主幹就不受影響。
 
@@ -74,8 +80,41 @@ git master，直接轉換回主幹
 
 如果在master，就diff 分枝名。反之亦然。
 
-可以在終端機直接判讀差異，可以按Q返回
-## 回到家目錄~
+可以在終端機直接判讀差異，可以按Q返回。(但目前我的終端機diff出來對不起來...)
+
+進行分枝push:
+>git push --set-upstream origin "分枝名"
+
+等效於:
+>git push -u origin "分枝名"
+
+合併：
+>git merge "分枝名"
+
+只有主幹才能合併分枝，分枝無法去合併主幹
+
+撤回commit:
+>git reset master^
+
+reset，不是代表重新設定，代表前往
+
+master^，代表master前一個狀態。^，往前一次的意思，^^往前兩次的狀態。
+
+reset XXX，XXX可以是commit編號，可以是主幹/分枝，可以是HEAD
+
+打開git日誌：
+>git log
+
+裡面可以看到commit編號
+
+加上分枝圖：
+>git log --graph
+
+若要看到倒數n筆紀錄：
+>git log -"n"
+
+
+## 回到家目錄~s
 在上傳之前要打造ssh-key，才能夠push
 >ssh-keygen -t rsa -b 4096 -C "sfad159357@gmail.com"
 
