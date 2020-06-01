@@ -65,8 +65,16 @@ master，主幹
 
 -b，branch
 
-git checkout master，轉換回主幹 
+git master，直接轉換回主幹
 
+*在分枝中add, commit後，這時被修改的資訊被儲存於分枝裡頭，這時再切回主幹，會回復原來上次commit後的內容。因為後面做的修改，已經被岔出分枝當中，主幹就不受影響。
+
+查看主幹和分枝之間code的差異：
+>git diff "主幹/分枝名稱"
+
+如果在master，就diff 分枝名。反之亦然。
+
+可以在終端機直接判讀差異，可以按Q返回
 ## 回到家目錄~
 在上傳之前要打造ssh-key，才能夠push
 >ssh-keygen -t rsa -b 4096 -C "sfad159357@gmail.com"
