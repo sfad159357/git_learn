@@ -285,4 +285,8 @@ master:tmp，代表master的分枝
 2.強迫覆蓋，不在我本機上的文件通通不見:
 >git push -f
 
+<<<<<<< HEAD
 ## 分枝測試1
+=======
+## master測試1
+>>>>>>> master
