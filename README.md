@@ -46,7 +46,9 @@ list所有檔案包含隱藏的檔案：
 追蹤並提交：
 >git commit -a -m"更新主題" -m "詳細內容"
 
-git add.之後，這指令一次包括git add .和git commit，每次commit都要附加訊息，不然無法commit
+git add.之後，這指令一次只包括git add "修改後的files"，不包含"新創建的files"。
+
+而-m，每次commit都要附加訊息，不然無法commit
 
 上傳github：
 >git push origin master 
@@ -73,17 +75,25 @@ git master，直接轉換回主幹
 分枝改名：
 >git branch -m "舊分枝名" "新分枝名"
 
-*** 記得要按ctrl+S，儲存後電腦才知道那是已經修改過的內容
+!!!記得要按ctrl+S，儲存後電腦才知道那是已經修改過的內容(待確認是不是一定要儲存)
+
 在checkout之前，要先把任何修改後的內容做個commit
 
-*在分枝中add, commit後，這時被修改的資訊被儲存於分枝裡頭，這時再切回主幹，會回復原來上次commit後的內容。因為後面做的修改，已經被岔出分枝當中，主幹就不受影響。
+在分枝中add, commit後，這時被修改的資訊被儲存於分枝裡頭，這時再切回主幹，會回復原來上次commit後的內容。因為後面做的修改，已經被岔出分枝當中，主幹就不受影響。
+
+如果push後，分枝的commit已經上傳了，這時在checkout回master，不會有code上差異
+
+查看離上次commit後差異了哪些code:
+>git diff
 
 查看主幹和分枝之間code的差異：
 >git diff "主幹/分枝名稱"
 
+*要儲存才會更改訊息
+
 如果在master，就diff 分枝名。反之亦然。
 
-可以在終端機直接判讀差異，可以按Q返回。(但目前我的終端機diff出來對不起來。ps:底下:往下拉會有訊息移上來)
+可以在終端機直接判讀差異，可以按Q返回。(但目前我的終端機diff出來對不起來。ps:底下:往下拉會有訊息移上來，看到END才結束)
 
 進行分枝push:
 >git push --set-upstream origin "分枝名"
@@ -93,8 +103,6 @@ git master，直接轉換回主幹
 
 合併：
 >git merge "分枝名"
-
-只有主幹才能合併分枝，分枝無法去合併主幹
 
 撤回commit:
 >git reset master^
@@ -118,6 +126,29 @@ reset XXX，XXX可以是commit編號，可以是主幹/分枝，可以是HEAD
 
 查看HEAD位置：
 >git show HEAD
+
+一樣有新增刪除diff訊息，但是對起來就是怪怪的
+
+刪除分枝：
+>git branch -d "分枝名"
+
+# 備註：
+1.分枝feature-readme-instructions commit時是失敗的，創建分枝後居然還是跟主幹master一樣合併在一起，沒有岔開，我看log中HEAD一樣指在master上，同時也擁有分枝feature，我猜想應該是創建分枝時，直接用:
+>git checkout -b "分枝名稱"
+
+的關係吧？
+
+2.如果分枝源自於master，然後分枝比master多幾個commit，接下來切回master，進行合併分枝。git會判斷其實分枝只多幾個commit，自動選用「快轉模式(Fast Forward)」來進行合併，在log --graph當中，就不會看到分叉後又接回去的樹形圖。
+
+如果真的想要看到分岔合併線圖，可以在合併時：
+>git merge "分枝名" --no-ff
+
+--no-ff，代表不使用快轉模式
+
+3.通常分枝在commit後，不能直接和master merge，而是會先push到github上，然後去create pull request，讓你的code供團隊瀏覽並在底下留言。可以針對第幾行的範圍下建議或評論，如果ok，有permission的人才能決定是否合併github中的master。合併成功後，原來在自己的分枝並不會有master，所以要:
+>git pull origin master
+
+將遠端合併完成的master拉到本地端的code，繼續進行coding。這樣做確保不會有錯誤的code混進master code裡面。
 
 ## 回到家目錄~s
 在上傳之前要打造ssh-key，才能夠push
@@ -253,3 +284,5 @@ master:tmp，代表master的分枝
 
 2.強迫覆蓋，不在我本機上的文件通通不見:
 >git push -f
+
+## 分枝測試1
