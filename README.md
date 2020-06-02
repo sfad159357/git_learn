@@ -104,14 +104,24 @@ git master，直接轉換回主幹
 合併：
 >git merge "分枝名"
 
+撤回stage:
+>git reset ("檔名")
+
 撤回commit:
 >git reset master^
+
+也等效於
+
+>git rest HEAD^
 
 reset，不是代表重新設定，代表前往
 
 master^，代表master前一個狀態。^，往前一次的意思，^^往前兩次的狀態。
 
 reset XXX，XXX可以是commit編號，可以是主幹/分枝，可以是HEAD
+
+撤回commit並刪除在工作區被commit的內容：
+>git reset --hard "commit編號"
 
 打開git日誌：
 >git log
@@ -290,3 +300,5 @@ master:tmp，代表master的分枝
 >git push -f
 
 ## master測試1
+
+拉啦啦啦
