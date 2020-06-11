@@ -112,7 +112,7 @@ git master，直接轉換回主幹
 
 也等效於
 
->git rest HEAD^
+>git reset HEAD^
 
 reset，不是代表重新設定，代表前往
 
